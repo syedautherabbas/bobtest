@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	
+  <display-name>BOBAPI</display-name>
+  
+  <filter>
+    <filter-name>CORS</filter-name>
+    <filter-class>com.thetransactioncompany.cors.CORSFilter</filter-class>
+      <init-param>
+                <param-name>cors.supportedMethods</param-name>
+                <param-value>GET,PUT,POST,DELETE,OPTIONS</param-value>
+        </init-param>
+        
+        <init-param>
+                <param-name>cors.allowOrigin</param-name>
+                <param-value>*</param-value>
+        </init-param>
+</filter>
+<filter-mapping>
+    <filter-name>CORS</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+ 
+	<context-param>
+		<param-name>resteasy.scan</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>resteasy.scan.providers</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+		<param-name>resteasy.scan.resources</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>BOBAPI</servlet-name>
+		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>jersey.config.server.provider.packages</param-name>
+			<param-value>com.wm.mas.cashapps.users.controllers</param-value>
+		</init-param>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>com.wm.mas.cashapps.users.controllers.UsersController</param-value>
+		</init-param>
+		<init-param>
+			<param-name>jersey.config.server.provider.scanning.recursive</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>BOBAPI</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+  
+  
+</web-app>
